@@ -51,11 +51,11 @@ export function IngredientTable({ ingredients, onEdit, onDelete }: IngredientTab
                       {ingredient.quantity} {ingredient.unit}
                     </span>
                   </td>
-                  <td className="p-4 text-card-foreground">
-                    ${ingredient.unitPrice.toFixed(2)}
+                <td className="p-4 text-card-foreground">
+                    ₱{ingredient.unitPrice.toFixed(2)}
                   </td>
                   <td className="p-4 font-medium text-card-foreground">
-                    ${(ingredient.quantity * ingredient.unitPrice).toFixed(2)}
+                    ₱{(ingredient.quantity * ingredient.unitPrice).toFixed(2)}
                   </td>
                   <td className="p-4">
                     {isLowStock ? (

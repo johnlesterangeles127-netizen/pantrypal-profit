@@ -32,7 +32,7 @@ export function SalesChart({ data, title }: SalesChartProps) {
             <YAxis 
               stroke="hsl(var(--muted-foreground))"
               fontSize={12}
-              tickFormatter={(value) => `$${value}`}
+              tickFormatter={(value) => `₱${value}`}
             />
             <Tooltip 
               contentStyle={{ 
@@ -41,7 +41,7 @@ export function SalesChart({ data, title }: SalesChartProps) {
                 borderRadius: '12px',
                 boxShadow: '0 4px 12px rgba(0,0,0,0.1)'
               }}
-              formatter={(value: number) => [`$${value.toFixed(2)}`, '']}
+              formatter={(value: number) => [`₱${value.toFixed(2)}`, '']}
             />
             <Area
               type="monotone"

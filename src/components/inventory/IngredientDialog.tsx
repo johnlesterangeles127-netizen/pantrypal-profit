@@ -121,7 +121,7 @@ export function IngredientDialog({ open, onOpenChange, ingredient, onSave }: Ing
             </div>
 
             <div className="space-y-2">
-              <Label htmlFor="unitPrice">Unit Price ($)</Label>
+              <Label htmlFor="unitPrice">Unit Price (₱)</Label>
               <Input
                 id="unitPrice"
                 type="number"

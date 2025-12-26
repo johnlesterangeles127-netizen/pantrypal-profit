@@ -38,13 +38,13 @@ export function SalesTable({ sales, onEdit, onDelete }: SalesTableProps) {
                   {sale.quantity}
                 </td>
                 <td className="p-4 text-muted-foreground">
-                  ${sale.unitPrice.toFixed(2)}
+                  ₱{sale.unitPrice.toFixed(2)}
                 </td>
                 <td className="p-4 text-muted-foreground">
                   {format(sale.date, 'MMM dd, yyyy')}
                 </td>
                 <td className="p-4 text-right font-semibold text-success">
-                  +${sale.total.toFixed(2)}
+                  +₱{sale.total.toFixed(2)}
                 </td>
                 <td className="p-4">
                   <div className="flex items-center justify-end gap-2">

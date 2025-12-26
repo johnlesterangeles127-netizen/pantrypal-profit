@@ -86,7 +86,7 @@ export function SaleDialog({ open, onOpenChange, sale, onSave }: SaleDialogProps
             </div>
 
             <div className="space-y-2">
-              <Label htmlFor="unitPrice">Unit Price ($)</Label>
+              <Label htmlFor="unitPrice">Unit Price (₱)</Label>
               <Input
                 id="unitPrice"
                 type="number"
@@ -114,7 +114,7 @@ export function SaleDialog({ open, onOpenChange, sale, onSave }: SaleDialogProps
             <div className="space-y-2">
               <Label>Total</Label>
               <div className="h-10 px-3 py-2 bg-muted rounded-md flex items-center">
-                <span className="font-semibold text-success">${formData.total.toFixed(2)}</span>
+                <span className="font-semibold text-success">₱{formData.total.toFixed(2)}</span>
               </div>
             </div>
           </div>

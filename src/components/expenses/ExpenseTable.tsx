@@ -52,7 +52,7 @@ export function ExpenseTable({ expenses, onEdit, onDelete }: ExpenseTableProps) 
                   {format(expense.date, 'MMM dd, yyyy')}
                 </td>
                 <td className="p-4 text-right font-semibold text-destructive">
-                  -${expense.amount.toFixed(2)}
+                  -₱{expense.amount.toFixed(2)}
                 </td>
                 <td className="p-4">
                   <div className="flex items-center justify-end gap-2">

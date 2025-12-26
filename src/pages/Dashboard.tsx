@@ -20,7 +20,7 @@ export default function Dashboard() {
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
         <StatCard
           title="Today's Sales"
-          value={`$${todaySales.toLocaleString()}`}
+          value={`₱${todaySales.toLocaleString()}`}
           change="+12% from yesterday"
           changeType="positive"
           icon={TrendingUp}
@@ -29,7 +29,7 @@ export default function Dashboard() {
         />
         <StatCard
           title="Today's Expenses"
-          value={`$${todayExpenses.toLocaleString()}`}
+          value={`₱${todayExpenses.toLocaleString()}`}
           change="+5% from yesterday"
           changeType="negative"
           icon={TrendingDown}
@@ -38,7 +38,7 @@ export default function Dashboard() {
         />
         <StatCard
           title="Today's Profit"
-          value={`$${todayProfit.toLocaleString()}`}
+          value={`₱${todayProfit.toLocaleString()}`}
           change="+18% from yesterday"
           changeType="positive"
           icon={DollarSign}
@@ -47,7 +47,7 @@ export default function Dashboard() {
         />
         <StatCard
           title="Inventory Value"
-          value={`$${inventoryValue.toFixed(2)}`}
+          value={`₱${inventoryValue.toFixed(2)}`}
           change={`${mockIngredients.length} items tracked`}
           changeType="neutral"
           icon={Package}
