@@ -26,7 +26,7 @@ export function Sidebar() {
             <ChefHat className="w-6 h-6 text-primary-foreground" />
           </div>
           <div>
-            <h1 className="text-lg font-bold text-sidebar-foreground">RestaurantIQ</h1>
+            <h1 className="text-lg font-bold text-sidebar-foreground">Reserved</h1>
             <p className="text-xs text-sidebar-foreground/60">Inventory Manager</p>
           </div>
         </div>

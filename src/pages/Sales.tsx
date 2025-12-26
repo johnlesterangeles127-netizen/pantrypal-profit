@@ -70,12 +70,12 @@ export default function Sales() {
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
         <div className="bg-card rounded-2xl p-6 border border-border shadow-sm animate-slide-up">
           <p className="text-muted-foreground text-sm font-medium">Total Sales</p>
-          <p className="text-3xl font-bold text-success mt-2">${totalSales.toFixed(2)}</p>
+          <p className="text-3xl font-bold text-success mt-2">₱{totalSales.toFixed(2)}</p>
           <p className="text-sm text-muted-foreground mt-2">{sales.length} transactions</p>
         </div>
         <div className="bg-card rounded-2xl p-6 border border-border shadow-sm animate-slide-up" style={{ animationDelay: '100ms' }}>
           <p className="text-muted-foreground text-sm font-medium">Weekly Profit</p>
-          <p className="text-3xl font-bold text-primary mt-2">${totalProfit.toFixed(2)}</p>
+          <p className="text-3xl font-bold text-primary mt-2">₱{totalProfit.toFixed(2)}</p>
           <p className="text-sm text-success mt-2">+15% from last week</p>
         </div>
       </div>
@@ -94,14 +94,14 @@ export default function Sales() {
                 <BarChart data={mockDailyStats}>
                   <CartesianGrid strokeDasharray="3 3" stroke="hsl(var(--border))" />
                   <XAxis dataKey="date" stroke="hsl(var(--muted-foreground))" fontSize={12} />
-                  <YAxis stroke="hsl(var(--muted-foreground))" fontSize={12} tickFormatter={(value) => `$${value}`} />
+                  <YAxis stroke="hsl(var(--muted-foreground))" fontSize={12} tickFormatter={(value) => `₱${value}`} />
                   <Tooltip 
                     contentStyle={{ 
                       backgroundColor: 'hsl(var(--card))',
                       border: '1px solid hsl(var(--border))',
                       borderRadius: '12px',
                     }}
-                    formatter={(value: number) => [`$${value.toFixed(2)}`, '']}
+                    formatter={(value: number) => [`₱${value.toFixed(2)}`, '']}
                   />
                   <Bar dataKey="sales" fill="hsl(var(--primary))" radius={[4, 4, 0, 0]} name="Sales" />
                   <Bar dataKey="profit" fill="hsl(var(--success))" radius={[4, 4, 0, 0]} name="Profit" />
@@ -119,14 +119,14 @@ export default function Sales() {
                 <LineChart data={mockMonthlyStats}>
                   <CartesianGrid strokeDasharray="3 3" stroke="hsl(var(--border))" />
                   <XAxis dataKey="month" stroke="hsl(var(--muted-foreground))" fontSize={12} />
-                  <YAxis stroke="hsl(var(--muted-foreground))" fontSize={12} tickFormatter={(value) => `$${(value / 1000).toFixed(0)}k`} />
+                  <YAxis stroke="hsl(var(--muted-foreground))" fontSize={12} tickFormatter={(value) => `₱${(value / 1000).toFixed(0)}k`} />
                   <Tooltip 
                     contentStyle={{ 
                       backgroundColor: 'hsl(var(--card))',
                       border: '1px solid hsl(var(--border))',
                       borderRadius: '12px',
                     }}
-                    formatter={(value: number) => [`$${value.toLocaleString()}`, '']}
+                    formatter={(value: number) => [`₱${value.toLocaleString()}`, '']}
                   />
                   <Line 
                     type="monotone" 

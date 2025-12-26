@@ -81,7 +81,7 @@ export default function Expenses() {
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 mb-6">
         <div className="bg-card rounded-2xl p-6 border border-border shadow-sm animate-slide-up">
           <p className="text-muted-foreground text-sm font-medium">Total Expenses</p>
-          <p className="text-3xl font-bold text-destructive mt-2">${totalExpenses.toFixed(2)}</p>
+          <p className="text-3xl font-bold text-destructive mt-2">₱{totalExpenses.toFixed(2)}</p>
           <p className="text-sm text-muted-foreground mt-2">{expenses.length} transactions</p>
         </div>
 
@@ -91,7 +91,7 @@ export default function Expenses() {
             <ResponsiveContainer width="100%" height="100%">
               <BarChart data={chartData} layout="vertical">
                 <CartesianGrid strokeDasharray="3 3" stroke="hsl(var(--border))" />
-                <XAxis type="number" tickFormatter={(value) => `$${value}`} stroke="hsl(var(--muted-foreground))" fontSize={12} />
+                <XAxis type="number" tickFormatter={(value) => `₱${value}`} stroke="hsl(var(--muted-foreground))" fontSize={12} />
                 <YAxis dataKey="category" type="category" stroke="hsl(var(--muted-foreground))" fontSize={12} width={100} />
                 <Tooltip 
                   contentStyle={{ 
@@ -99,7 +99,7 @@ export default function Expenses() {
                     border: '1px solid hsl(var(--border))',
                     borderRadius: '12px',
                   }}
-                  formatter={(value: number) => [`$${value.toFixed(2)}`, 'Amount']}
+                  formatter={(value: number) => [`₱${value.toFixed(2)}`, 'Amount']}
                 />
                 <Bar dataKey="amount" radius={[0, 4, 4, 0]}>
                   {chartData.map((_, index) => (
