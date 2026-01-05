@@ -1,5 +1,5 @@
 import { Ingredient } from '@/types/inventory';
-import { Pencil, Trash2 } from 'lucide-react';
+import { Pencil, Trash2, Plus, Minus } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 import { cn } from '@/lib/utils';
@@ -8,9 +8,10 @@ interface IngredientTableProps {
   ingredients: Ingredient[];
   onEdit: (ingredient: Ingredient) => void;
   onDelete: (id: string) => void;
+  onQuantityChange: (id: string, delta: number) => void;
 }
 
-export function IngredientTable({ ingredients, onEdit, onDelete }: IngredientTableProps) {
+export function IngredientTable({ ingredients, onEdit, onDelete, onQuantityChange }: IngredientTableProps) {
   return (
     <div className="bg-card rounded-2xl border border-border shadow-sm overflow-hidden animate-slide-up">
       <div className="overflow-x-auto">
@@ -44,14 +45,33 @@ export function IngredientTable({ ingredients, onEdit, onDelete }: IngredientTab
                     </Badge>
                   </td>
                   <td className="p-4">
-                    <span className={cn(
-                      "font-medium",
-                      isLowStock ? "text-destructive" : "text-card-foreground"
-                    )}>
-                      {ingredient.quantity} {ingredient.unit}
-                    </span>
+                    <div className="flex items-center gap-2">
+                      <Button
+                        variant="outline"
+                        size="icon"
+                        className="h-7 w-7"
+                        onClick={() => onQuantityChange(ingredient.id, -1)}
+                        disabled={ingredient.quantity <= 0}
+                      >
+                        <Minus className="w-3 h-3" />
+                      </Button>
+                      <span className={cn(
+                        "font-medium min-w-[60px] text-center",
+                        isLowStock ? "text-destructive" : "text-card-foreground"
+                      )}>
+                        {ingredient.quantity} {ingredient.unit}
+                      </span>
+                      <Button
+                        variant="outline"
+                        size="icon"
+                        className="h-7 w-7"
+                        onClick={() => onQuantityChange(ingredient.id, 1)}
+                      >
+                        <Plus className="w-3 h-3" />
+                      </Button>
+                    </div>
                   </td>
-                <td className="p-4 text-card-foreground">
+                  <td className="p-4 text-card-foreground">
                     ₱{ingredient.unitPrice.toFixed(2)}
                   </td>
                   <td className="p-4 font-medium text-card-foreground">
