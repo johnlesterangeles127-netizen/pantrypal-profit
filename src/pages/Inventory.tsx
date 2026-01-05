@@ -5,20 +5,24 @@ import { IngredientDialog } from '@/components/inventory/IngredientDialog';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Plus, Search } from 'lucide-react';
-import { mockIngredients } from '@/data/mockData';
+import { mockIngredients, categories } from '@/data/mockData';
 import { Ingredient } from '@/types/inventory';
 import { toast } from 'sonner';
+import { cn } from '@/lib/utils';
 
 export default function Inventory() {
   const [ingredients, setIngredients] = useState<Ingredient[]>(mockIngredients);
   const [search, setSearch] = useState('');
+  const [selectedCategory, setSelectedCategory] = useState<string | null>(null);
   const [dialogOpen, setDialogOpen] = useState(false);
   const [editingIngredient, setEditingIngredient] = useState<Ingredient | null>(null);
 
-  const filteredIngredients = ingredients.filter(ingredient =>
-    ingredient.name.toLowerCase().includes(search.toLowerCase()) ||
-    ingredient.category.toLowerCase().includes(search.toLowerCase())
-  );
+  const filteredIngredients = ingredients.filter(ingredient => {
+    const matchesSearch = ingredient.name.toLowerCase().includes(search.toLowerCase()) ||
+      ingredient.category.toLowerCase().includes(search.toLowerCase());
+    const matchesCategory = !selectedCategory || ingredient.category === selectedCategory;
+    return matchesSearch && matchesCategory;
+  });
 
   const handleSave = (data: Omit<Ingredient, 'id' | 'lastUpdated'>) => {
     if (editingIngredient) {
@@ -55,6 +59,14 @@ export default function Inventory() {
     setDialogOpen(true);
   };
 
+  const handleQuantityChange = (id: string, delta: number) => {
+    setIngredients(ingredients.map(ing =>
+      ing.id === id
+        ? { ...ing, quantity: Math.max(0, ing.quantity + delta), lastUpdated: new Date() }
+        : ing
+    ));
+  };
+
   return (
     <PageLayout
       title="Inventory"
@@ -66,7 +78,7 @@ export default function Inventory() {
         </Button>
       }
     >
-      <div className="mb-6">
+      <div className="mb-6 space-y-4">
         <div className="relative max-w-md">
           <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-muted-foreground" />
           <Input
@@ -76,12 +88,35 @@ export default function Inventory() {
             className="pl-10"
           />
         </div>
+        
+        <div className="flex flex-wrap gap-2">
+          <Button
+            variant={selectedCategory === null ? "default" : "outline"}
+            size="sm"
+            onClick={() => setSelectedCategory(null)}
+            className="rounded-full"
+          >
+            All
+          </Button>
+          {categories.map((category) => (
+            <Button
+              key={category}
+              variant={selectedCategory === category ? "default" : "outline"}
+              size="sm"
+              onClick={() => setSelectedCategory(category)}
+              className="rounded-full"
+            >
+              {category}
+            </Button>
+          ))}
+        </div>
       </div>
 
       <IngredientTable
         ingredients={filteredIngredients}
         onEdit={handleEdit}
         onDelete={handleDelete}
+        onQuantityChange={handleQuantityChange}
       />
 
       <IngredientDialog
