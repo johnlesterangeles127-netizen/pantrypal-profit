@@ -1,11 +1,12 @@
 import { PageLayout } from '@/components/layout/PageLayout';
 import { StatCard } from '@/components/dashboard/StatCard';
 import { SalesChart } from '@/components/dashboard/SalesChart';
-import { RecentActivity } from '@/components/dashboard/RecentActivity';
+import { DailySalesChart } from '@/components/dashboard/DailySalesChart';
+import { TopProductsChart } from '@/components/dashboard/TopProductsChart';
 import { LowStockAlert } from '@/components/dashboard/LowStockAlert';
 import { Button } from '@/components/ui/button';
-import { DollarSign, TrendingUp, TrendingDown, Package, Printer } from 'lucide-react';
-import { mockIngredients, mockExpenses, mockSales, mockMonthlyStats } from '@/data/mockData';
+import { DollarSign, TrendingUp, TrendingDown, ShoppingCart, Printer } from 'lucide-react';
+import { mockIngredients, mockExpenses, mockSales, mockMonthlyStats, mockDailyStats, topSellingProducts } from '@/data/mockData';
 import { printAllData } from '@/utils/printReport';
 
 export default function Dashboard() {
@@ -13,7 +14,12 @@ export default function Dashboard() {
   const monthlySales = currentMonth?.sales || 0;
   const monthlyExpenses = currentMonth?.expenses || 0;
   const monthlyProfit = currentMonth?.profit || 0;
-  const inventoryValue = mockIngredients.reduce((acc, item) => acc + item.quantity * item.unitPrice, 0);
+  
+  // Calculate today's sales from mockSales
+  const today = new Date().toDateString();
+  const todaysSales = mockSales
+    .filter(sale => new Date(sale.date).toDateString() === today)
+    .reduce((acc, sale) => acc + sale.total, 0);
 
   const handlePrint = () => {
     printAllData({
@@ -37,13 +43,22 @@ export default function Dashboard() {
     >
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
         <StatCard
+          title="Today's Sales"
+          value={`₱${todaysSales.toLocaleString()}`}
+          change={`${mockSales.filter(s => new Date(s.date).toDateString() === today).length} orders`}
+          changeType="positive"
+          icon={ShoppingCart}
+          iconBg="bg-primary/10"
+          delay={0}
+        />
+        <StatCard
           title="Monthly Sales"
           value={`₱${monthlySales.toLocaleString()}`}
           change="+8% from last month"
           changeType="positive"
           icon={TrendingUp}
           iconBg="bg-success/10"
-          delay={0}
+          delay={100}
         />
         <StatCard
           title="Monthly Expenses"
@@ -52,7 +67,7 @@ export default function Dashboard() {
           changeType="negative"
           icon={TrendingDown}
           iconBg="bg-destructive/10"
-          delay={100}
+          delay={200}
         />
         <StatCard
           title="Monthly Profit"
@@ -60,30 +75,18 @@ export default function Dashboard() {
           change="+12% from last month"
           changeType="positive"
           icon={DollarSign}
-          iconBg="bg-primary/10"
-          delay={200}
-        />
-        <StatCard
-          title="Inventory Value"
-          value={`₱${inventoryValue.toFixed(2)}`}
-          change={`${mockIngredients.length} items tracked`}
-          changeType="neutral"
-          icon={Package}
           iconBg="bg-accent/10"
           delay={300}
         />
       </div>
 
-      <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
-        <div className="lg:col-span-2">
-          <SalesChart data={mockMonthlyStats} title="Monthly Performance" />
-        </div>
-        <div className="space-y-6">
-          <RecentActivity />
-        </div>
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-6">
+        <SalesChart data={mockMonthlyStats} title="Monthly Performance" />
+        <DailySalesChart data={mockDailyStats} />
       </div>
 
-      <div className="mt-6">
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+        <TopProductsChart data={topSellingProducts} />
         <LowStockAlert ingredients={mockIngredients} />
       </div>
     </PageLayout>

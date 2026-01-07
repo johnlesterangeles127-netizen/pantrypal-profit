@@ -1,5 +1,5 @@
 import { Sale } from '@/types/inventory';
-import { Pencil, Trash2 } from 'lucide-react';
+import { Pencil, Trash2, Receipt } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { format } from 'date-fns';
 
@@ -16,9 +16,8 @@ export function SalesTable({ sales, onEdit, onDelete }: SalesTableProps) {
         <table className="w-full">
           <thead>
             <tr className="border-b border-border bg-muted/30">
-              <th className="text-left p-4 text-sm font-semibold text-muted-foreground">Item</th>
-              <th className="text-left p-4 text-sm font-semibold text-muted-foreground">Quantity</th>
-              <th className="text-left p-4 text-sm font-semibold text-muted-foreground">Unit Price</th>
+              <th className="text-left p-4 text-sm font-semibold text-muted-foreground">Order #</th>
+              <th className="text-left p-4 text-sm font-semibold text-muted-foreground">Items</th>
               <th className="text-left p-4 text-sm font-semibold text-muted-foreground">Date</th>
               <th className="text-right p-4 text-sm font-semibold text-muted-foreground">Total</th>
               <th className="text-right p-4 text-sm font-semibold text-muted-foreground">Actions</th>
@@ -32,19 +31,30 @@ export function SalesTable({ sales, onEdit, onDelete }: SalesTableProps) {
                 style={{ animationDelay: `${index * 50}ms` }}
               >
                 <td className="p-4">
-                  <p className="font-medium text-card-foreground">{sale.itemName}</p>
+                  <div className="flex items-center gap-2">
+                    <Receipt className="w-4 h-4 text-muted-foreground" />
+                    <span className="font-medium text-card-foreground">#{sale.id.padStart(4, '0')}</span>
+                  </div>
                 </td>
-                <td className="p-4 text-muted-foreground">
-                  {sale.quantity}
-                </td>
-                <td className="p-4 text-muted-foreground">
-                  ₱{sale.unitPrice.toFixed(2)}
+                <td className="p-4">
+                  <div className="space-y-1">
+                    {sale.items.map((item, idx) => (
+                      <div key={idx} className="flex justify-between text-sm">
+                        <span className="text-card-foreground">
+                          {item.quantity}x {item.name}
+                        </span>
+                        <span className="text-muted-foreground ml-4">
+                          ₱{(item.quantity * item.unitPrice).toFixed(2)}
+                        </span>
+                      </div>
+                    ))}
+                  </div>
                 </td>
                 <td className="p-4 text-muted-foreground">
                   {format(sale.date, 'MMM dd, yyyy')}
                 </td>
                 <td className="p-4 text-right font-semibold text-success">
-                  +₱{sale.total.toFixed(2)}
+                  ₱{sale.total.toFixed(2)}
                 </td>
                 <td className="p-4">
                   <div className="flex items-center justify-end gap-2">

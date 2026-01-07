@@ -154,13 +154,12 @@ export function printAllData({ ingredients, expenses, sales, monthlyStats }: Pri
       </div>
 
       <div class="section">
-        <h2>🛒 Recent Sales (${sales.length} records)</h2>
+        <h2>🛒 Recent Sales (${sales.length} orders)</h2>
         <table>
           <thead>
             <tr>
-              <th>Item</th>
-              <th>Quantity</th>
-              <th>Unit Price</th>
+              <th>Order #</th>
+              <th>Items</th>
               <th>Total</th>
               <th>Date</th>
             </tr>
@@ -168,9 +167,8 @@ export function printAllData({ ingredients, expenses, sales, monthlyStats }: Pri
           <tbody>
             ${sales.map(sale => `
               <tr>
-                <td>${sale.itemName}</td>
-                <td>${sale.quantity}</td>
-                <td>₱${sale.unitPrice.toFixed(2)}</td>
+                <td>#${sale.id.padStart(4, '0')}</td>
+                <td>${sale.items.map(item => `${item.quantity}x ${item.name} (₱${(item.quantity * item.unitPrice).toFixed(2)})`).join('<br>')}</td>
                 <td>₱${sale.total.toFixed(2)}</td>
                 <td>${new Date(sale.date).toLocaleDateString('en-PH')}</td>
               </tr>
