@@ -1,8 +1,8 @@
 import { AreaChart, Area, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer } from 'recharts';
-import { DailyStats } from '@/types/inventory';
+import { MonthlyStats } from '@/types/inventory';
 
 interface SalesChartProps {
-  data: DailyStats[];
+  data: MonthlyStats[];
   title: string;
 }
 
@@ -25,14 +25,14 @@ export function SalesChart({ data, title }: SalesChartProps) {
             </defs>
             <CartesianGrid strokeDasharray="3 3" stroke="hsl(var(--border))" />
             <XAxis 
-              dataKey="date" 
+              dataKey="month" 
               stroke="hsl(var(--muted-foreground))"
               fontSize={12}
             />
             <YAxis 
               stroke="hsl(var(--muted-foreground))"
               fontSize={12}
-              tickFormatter={(value) => `₱${value}`}
+              tickFormatter={(value) => `₱${(value / 1000).toFixed(0)}k`}
             />
             <Tooltip 
               contentStyle={{ 
@@ -41,7 +41,7 @@ export function SalesChart({ data, title }: SalesChartProps) {
                 borderRadius: '12px',
                 boxShadow: '0 4px 12px rgba(0,0,0,0.1)'
               }}
-              formatter={(value: number) => [`₱${value.toFixed(2)}`, '']}
+              formatter={(value: number) => [`₱${value.toLocaleString()}`, '']}
             />
             <Area
               type="monotone"
