@@ -18,7 +18,7 @@ export default function Sales() {
   const [editingSale, setEditingSale] = useState<Sale | null>(null);
 
   const filteredSales = sales.filter(sale =>
-    sale.itemName.toLowerCase().includes(search.toLowerCase())
+    sale.items.some(item => item.name.toLowerCase().includes(search.toLowerCase()))
   );
 
   const totalSales = sales.reduce((acc, sale) => acc + sale.total, 0);

@@ -20,11 +20,61 @@ export const mockExpenses: Expense[] = [
 ];
 
 export const mockSales: Sale[] = [
-  { id: '1', itemName: 'Margherita Pizza', quantity: 15, unitPrice: 14.00, total: 210.00, date: new Date() },
-  { id: '2', itemName: 'Pasta Carbonara', quantity: 12, unitPrice: 16.00, total: 192.00, date: new Date() },
-  { id: '3', itemName: 'Grilled Salmon', quantity: 8, unitPrice: 24.00, total: 192.00, date: new Date() },
-  { id: '4', itemName: 'Caesar Salad', quantity: 10, unitPrice: 12.00, total: 120.00, date: new Date(Date.now() - 86400000) },
-  { id: '5', itemName: 'Tiramisu', quantity: 18, unitPrice: 8.00, total: 144.00, date: new Date(Date.now() - 86400000) },
+  { 
+    id: '1', 
+    items: [
+      { name: 'Margherita Pizza', quantity: 2, unitPrice: 280.00 },
+      { name: 'Pasta Carbonara', quantity: 1, unitPrice: 250.00 },
+      { name: 'Iced Tea', quantity: 3, unitPrice: 45.00 }
+    ],
+    total: 945.00, 
+    date: new Date() 
+  },
+  { 
+    id: '2', 
+    items: [
+      { name: 'Grilled Salmon', quantity: 2, unitPrice: 450.00 },
+      { name: 'Caesar Salad', quantity: 2, unitPrice: 180.00 }
+    ],
+    total: 1260.00, 
+    date: new Date() 
+  },
+  { 
+    id: '3', 
+    items: [
+      { name: 'Chicken Adobo', quantity: 3, unitPrice: 220.00 },
+      { name: 'Rice', quantity: 3, unitPrice: 35.00 },
+      { name: 'Halo-Halo', quantity: 2, unitPrice: 120.00 }
+    ],
+    total: 1005.00, 
+    date: new Date() 
+  },
+  { 
+    id: '4', 
+    items: [
+      { name: 'Sinigang na Baboy', quantity: 1, unitPrice: 350.00 },
+      { name: 'Crispy Pata', quantity: 1, unitPrice: 650.00 }
+    ],
+    total: 1000.00, 
+    date: new Date(Date.now() - 86400000) 
+  },
+  { 
+    id: '5', 
+    items: [
+      { name: 'Tiramisu', quantity: 4, unitPrice: 180.00 },
+      { name: 'Coffee', quantity: 4, unitPrice: 85.00 }
+    ],
+    total: 1060.00, 
+    date: new Date(Date.now() - 86400000) 
+  },
+];
+
+export const topSellingProducts = [
+  { name: 'Margherita Pizza', sold: 145, revenue: 40600 },
+  { name: 'Grilled Salmon', sold: 98, revenue: 44100 },
+  { name: 'Pasta Carbonara', sold: 112, revenue: 28000 },
+  { name: 'Chicken Adobo', sold: 89, revenue: 19580 },
+  { name: 'Caesar Salad', sold: 76, revenue: 13680 },
 ];
 
 export const mockDailyStats: DailyStats[] = [

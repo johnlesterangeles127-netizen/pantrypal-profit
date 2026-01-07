@@ -17,11 +17,15 @@ export interface Expense {
   date: Date;
 }
 
-export interface Sale {
-  id: string;
-  itemName: string;
+export interface SaleItem {
+  name: string;
   quantity: number;
   unitPrice: number;
+}
+
+export interface Sale {
+  id: string;
+  items: SaleItem[];
   total: number;
   date: Date;
 }

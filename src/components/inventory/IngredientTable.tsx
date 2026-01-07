@@ -21,8 +21,6 @@ export function IngredientTable({ ingredients, onEdit, onDelete, onQuantityChang
               <th className="text-left p-4 text-sm font-semibold text-muted-foreground">Name</th>
               <th className="text-left p-4 text-sm font-semibold text-muted-foreground">Category</th>
               <th className="text-left p-4 text-sm font-semibold text-muted-foreground">Quantity</th>
-              <th className="text-left p-4 text-sm font-semibold text-muted-foreground">Unit Price</th>
-              <th className="text-left p-4 text-sm font-semibold text-muted-foreground">Total Value</th>
               <th className="text-left p-4 text-sm font-semibold text-muted-foreground">Status</th>
               <th className="text-right p-4 text-sm font-semibold text-muted-foreground">Actions</th>
             </tr>
@@ -70,12 +68,6 @@ export function IngredientTable({ ingredients, onEdit, onDelete, onQuantityChang
                         <Plus className="w-3 h-3" />
                       </Button>
                     </div>
-                  </td>
-                  <td className="p-4 text-card-foreground">
-                    ₱{ingredient.unitPrice.toFixed(2)}
-                  </td>
-                  <td className="p-4 font-medium text-card-foreground">
-                    ₱{(ingredient.quantity * ingredient.unitPrice).toFixed(2)}
                   </td>
                   <td className="p-4">
                     {isLowStock ? (
